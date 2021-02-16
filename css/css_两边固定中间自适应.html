@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>test_CSS</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    /* 浮动 */
+    .box {
+      text-align: center;
+      line-height: 100px;
+    }
+
+    .left {
+      float: left;
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+    }
+
+    .right {
+      float: right;
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+    }
+
+    .center {
+      background: yellowgreen;
+      margin: 0 100px;
+      height: 100px;
+    }
+
+
+    .left1 {
+      float: left;
+      margin-left: -100%;
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+    }
+
+    .right1 {
+      float: left;
+      margin-left: -100px;
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+    }
+
+    .center1 {
+      float: left;
+      width: 100%;
+      height: 100px;
+      background: yellowgreen;
+    }
+
+    .center_div {
+      margin: 0 100px;
+    }
+
+    .box2 {
+      position: relative;
+    }
+
+    .left2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+    }
+
+    .right2 {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+    }
+
+    .center2 {
+      background: yellowgreen;
+      margin: 0 100px;
+      height: 100px;
+    }
+
+    .box3 {
+      display: flex;
+    }
+
+    .left3 {
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+    }
+
+    .right3 {
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+    }
+
+    .center3 {
+      /* flex: 1; */
+      flex-grow: 1;
+      /* flex-shrink: 1; */
+      /* flex-basis: 0%; */
+      height: 100px;
+      background: yellowgreen;
+    }
+
+
+    /* 圣杯布局 */
+    .box4 {
+      /* 预留出左右两边的宽度 */
+      margin: 0 100px;
+      height: 100px;
+    }
+
+    .center4 {
+      float: left;
+      width: 100%;
+      height: 100px;
+      background: yellowgreen;
+    }
+
+    .left4 {
+      width: 100px;
+      height: 100px;
+      float: left;
+      margin-left: -100%;
+      /* margin-left的意思是子元素的左边框距离父元素右边框的距离， */
+      background: skyblue;
+      /*中间栏的位置摆正之后，左栏的位置也相应右移，通过相对定位的left恢复到正确位置*/
+      position: relative;
+      left: -100px;
+    }
+
+    .right4 {
+      float: left;
+      width: 100px;
+      height: 100px;
+      margin-left: -100px;
+      background: skyblue;
+      /*中间栏的位置摆正之后，右栏的位置也相应左移，通过相对定位的right恢复到正确位置*/
+      position: relative;
+      right: -100px;
+    }
+
+    .center5 {
+      float: left;
+      width: 100%;
+      height: 100px;
+      background: yellowgreen;
+    }
+    .center5_div {
+      margin: 0 100px;
+    }
+
+    .left5,
+    .right5 {
+      float: left;
+      width: 100px;
+      height: 100px;
+      background: skyblue;
+    }
+
+    .left5 {
+      margin-left: -100%;
+    }
+
+    .right5 {
+      margin-left: -100px;
+    }
+  </style>
+</head>
+
+<body>
+  <p>~~~~~浮动~~~~~</p>
+  <!-- .box {
+    text-align: center;
+    line-height: 100px;
+  }
+
+  .left {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+  }
+
+  .right {
+    float: right;
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+  }
+
+  .center {
+    background: yellowgreen;
+    margin: 0 100px;
+    height: 100px;
+  } -->
+  <div class="box">
+    <div class="left">left</div>
+    <div class="right">right</div>
+    <div class="center">center</div>
+  </div>
+  <p>~~~~~浮动内嵌div~~~~~</p>
+  <!-- .left1 {
+    float: left;
+    margin-left: -100%;
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+  }
+
+  .right1 {
+    float: left;
+    margin-left: -100px;
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+  }
+
+  .center1 {
+    float: left;
+    width: 100%;
+    height: 100px;
+    background: yellowgreen;
+  }
+
+  .center_div {
+    margin: 0 100px;
+  } -->
+  <div class="box1">
+    <div class="center1">
+      <div class="center_div">center1</div>
+    </div>
+    <div class="left1">left1</div>
+    <div class="right1">right1</div>
+  </div>
+  <p>~~~~~定位~~~~~</p>
+  <!-- .box2 {
+    position: relative;
+  }
+
+  .left2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+  }
+
+  .right2 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+  }
+
+  .center2 {
+    background: yellowgreen;
+    margin: 0 100px;
+    height: 100px;
+  } -->
+  <div class="box2">
+    <div class="center2">center2</div>
+    <div class="left2">left2</div>
+    <div class="right2">right2</div>
+  </div>
+  <p>~~~~~flex~~~~~</p>
+  <!-- .box3 {
+    display: flex;
+  }
+
+  .left3 {
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+  }
+
+  .right3 {
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+  }
+
+  .center3 {
+    /* flex: 1; */
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    height: 100px;
+    background: yellowgreen;
+  } -->
+
+  <div class="box3">
+    <div class="left3">left3</div>
+    <div class="center3">center3</div>
+    <div class="right3">right3</div>
+  </div>
+  <p>~~~~~圣杯布局~~~~~</p>
+  <!-- .box4 {
+    /* 预留出左右两边的宽度 */
+    margin: 0 100px;
+    height: 100px;
+  }
+
+  .center4 {
+    float: left;
+    width: 100%;
+    height: 100px;
+    background: yellowgreen;
+  }
+
+  .left4 {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-left: -100%;
+    /* margin-left的意思是子元素的左边框距离父元素右边框的距离， */
+    background: skyblue;
+    /*中间栏的位置摆正之后，左栏的位置也相应右移，通过相对定位的left恢复到正确位置*/
+    position: relative;
+    left: -100px;
+  }
+
+  .right4 {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin-left: -100px;
+    background: skyblue;
+    /*中间栏的位置摆正之后，右栏的位置也相应左移，通过相对定位的right恢复到正确位置*/
+    position: relative;
+    right: -100px;
+  } -->
+
+  <div class="box4">
+    <div class="center4">圣杯布局</div>
+    <div class="left4">left4</div>
+    <div class="right4">right4</div>
+  </div>
+  <p>~~~~~双飞翼布局~~~~~</p>
+  <!-- .center5 {
+    float: left;
+    width: 100%;
+    height: 100px;
+    background: yellowgreen;
+  }
+  .center5_div {
+    margin: 0 100px;
+  }
+
+  .left5,
+  .right5 {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+  }
+
+  .left5 {
+    margin-left: -100%;
+  }
+
+  .right5 {
+    margin-left: -100px;
+  } -->
+  <div class="box5">
+    <div class="center5">
+      <div class="center5_div">双飞翼布局</div>
+    </div>
+    <div class="left5">left5</div>
+    <div class="right5">right5</div>
+  </div>
+
+
+
+
+  <script type="text/javascript">
+
+  </script>
+</body>
+
+</html>

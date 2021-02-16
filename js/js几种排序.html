@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>vue双向绑定</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <p>1<p>2</p></p>
+  </div>
+  <script type="text/javascript">
+    // 冒泡排序  每次比较前后两个数字，大的就向下沉，每次遍历都会得到沉底最大值，下次遍历就会减掉一个长度
+
+    function bubbleSort(arr) {
+      var len = arr.length;
+      var temp = [];
+      for (let i = 0; i < len; i++) {
+        for (let j = 1; j < len - i - 1; j++) {
+          if (arr[j] > arr[j + 1]) {
+            temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+          }
+        }
+      }
+      return arr;
+    }
+    // function bubbleSort(arr) {
+    //   var len = arr.length;
+    //   var temp = [];
+    //   for (let i = 0; i < len - 1; i++) {
+    //     for (let j = 0; j < len - i - 1; j++) {
+    //       if (arr[j] > arr[j + 1]) {
+    //         temp = arr[j + 1];
+    //         arr[j + 1] = arr[j];
+    //         arr[j] = temp;
+    //       }
+    //     }
+    //   }
+    //   return arr;
+    // }
+    // var arr = [1, 2, 67, 357, 547, 89, 79, 78, 5, 8, -12, -90];
+    // console.log(bubbleSort(arr));
+
+    // //插入排序
+    // function insertSort(arr) {
+    //   for (var i = 1; i < arr.length; i++) {
+    //     var preIndex = i - 1;
+    //     var current = arr[i];
+    //     while (preIndex >= 0 && arr[preIndex] > current) {
+    //       arr[preIndex + 1] = arr[preIndex];
+    //       preIndex--;
+    //     }
+    //     arr[preIndex + 1] = current;
+    //   }
+    //   return arr;
+    // }
+    // console.log(insertSort(arr));
+    //选择排序
+    // function SelectSort(arr) {
+    //   for (var i = 0; i < arr.length; i++) {
+    //     var minIndex = i;
+    //     for (var j = i + 1; j < arr.length; j++) {
+    //       if (arr[minIndex] > arr[j]) {
+    //         minIndex = j;
+    //       }
+    //     }
+    //     var temp = arr[i];
+    //     arr[i] = arr[minIndex];
+    //     arr[minIndex] = temp;
+    //     console.log(arr[i],arr[minIndex]);
+    //   }
+    //   return arr;
+    // }
+    // console.log(SelectSort(arr));
+
+    //快速排序
+    // var arr = [1, 2, 67, 357, 547, 89, 67, 79, 78, 5, 8, -12, -90];
+    // function quickSort(arr){
+    //   if(arr.length <=1) return arr;
+    //   var i = Math.floor(arr.length/2);
+    //   var middle = arr.splice(i,1);
+    //   var left = [],right = [];
+    //   arr.forEach(element => {
+    //     if(element > middle){
+    //       right.push(element);
+    //     }else{
+    //       left.push(element);
+    //     }
+    //   });
+
+    //   return quickSort(left).concat(middle,quickSort(right));
+    // }
+    // console.log(quickSort(arr));
+
+    //归并排序
+    var arr = [1, 2, 67, 357, 547, 89, 79, 78, 5, 8, -12, -90];
+    function sumSort(arr) {
+      function oSort(arr) {
+        var len = arr.length;
+        if (len === 1) return arr;
+        var middle = Math.floor(len * 0.5);
+        var left = arr.slice(0, middle);
+        var right = arr.slice(middle, len);
+
+        return cSort(oSort(left), oSort(right));
+      }
+      function cSort(left, right) {
+        var result = [];
+        while (left.length || right.length) {
+          if (left.length && right.length) {
+            if (left[0] < right[0]) {
+              result.push(left.shift());
+            } else {
+              result.push(right.shift());
+            }
+          } else if (left.length) {
+            result.push(left.shift());
+          } else {
+            result.push(right.shift());
+          }
+        }
+        return result;
+      }
+      return oSort(arr);
+    }
+    console.log(sumSort(arr));
+
+    // function sort9(array) {
+    //   var result = array.slice(0);
+
+    //   // 递归调用合并函数
+    //   function sort(array) {
+    //     var length = array.length,
+    //       mid = Math.floor(length * 0.5),
+    //       left = array.slice(0, mid),
+    //       right = array.slice(mid, length);
+
+    //     if (length === 1) {
+    //       return array;
+    //     }
+    //     return merge(sort(left), sort(right));
+    //   }
+
+    //   // 合并 两有序的数组
+    //   function merge(left, right) {
+    //     var result = [];
+
+    //     while (left.length || right.length) {
+
+    //       if (left.length && right.length) {
+
+    //         if (left[0] < right[0]) {
+    //           result.push(left.shift());
+    //         } else {
+    //           result.push(right.shift());
+    //         }
+
+    //       } else if (left.length) {
+    //         result.push(left.shift());
+    //       } else {
+    //         result.push(right.shift());
+    //       }
+    //     }
+    //     return result;
+    //   }
+
+    //   return sort(result);
+    // }
+
+    // console.log(sort9(arr));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function quickSort(arr) {
+//   if (arr.length <= 1) {
+//     return arr;
+//   }
+//   var s = Math.floor(arr.length / 2);
+//   var temp = arr.splice(s, 1);
+
+//   var left = [], right = [];
+//   arr.forEach(i => {
+//     // console.log(i,index);
+//     if (i > temp) {
+//       right.push(i);
+//     } else {
+//       left.push(i)
+//     }
+//   });
+//   return quickSort(left).concat(temp, quickSort(right));
+// }
+// console.log(quickSort(arr));
+  </script>
+</body>
+
+</html>

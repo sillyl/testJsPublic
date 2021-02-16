@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0; 
+    }
+    #container{ 
+      width: 300px;
+      margin: auto;
+      font-size: 0;
+      border: 1px solid red;
+    }
+    #container>div {
+      display: inline-block;
+      width:33.33%;
+      height: 100px;
+      background: skyblue;
+      /* float: left; */
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>1.标签紧挨着写，去除空格和换行</li>
+    <li>2.给并排div添加float：left</li>
+    <li>3.给包住他们的父级元素添加font-size:0</li>
+  </ul>
+  <div id="container">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </div>
+  <script type="text/javascript">
+
+  </script>
+</body>
+
+</html>

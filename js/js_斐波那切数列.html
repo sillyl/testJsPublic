@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>斐波那切数列</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+
+  <script type="text/javascript">
+    function getNthFibonacci(count) {
+      var arr = [1, 1];
+      for (var i = 2; i <= count; i++) {
+        arr.push(arr[i - 1] + arr[i - 2]);
+      }
+      return arr;
+    }
+    var result = getNthFibonacci(5);
+    console.log(result);
+
+    var count = 65;
+    var arr = [4, 50, 30, 20, 5];
+    arr = arr.sort((a, b) => {
+      return a - b;
+    });
+    function dd(count, arrs) {
+      var sum = 0;
+      while(count>=sum){
+        for (var i = 0; i < arrs.length; i++) {
+          sum = arr[i]+arr[i+1];
+}
+        
+      }
+     
+    
+     
+
+    }
+
+  </script>
+</body>
+
+</html>

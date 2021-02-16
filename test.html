@@ -1,0 +1,1315 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>test</title>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .box {
+      height: 120px;
+      width: 200px;
+      background: #ccc;
+      /* display: flex; */
+      /*高度为0,高度不为0*/
+      /* float: left;宽度、高度为0 */
+      /* position: absolute; 宽度、高度为0*/
+      /* display: inline;宽度、高度都为auto */
+      /* display: flex; */
+      /* flex-direction: row-reverse; */
+      /* justify-content: space-between; */
+      /* justify-content: center;
+      align-items: center; */
+      /* align-items: stretch; */
+      /* font-size: 0; */
+      display: table;
+      word-spacing: -1em;
+    }
+
+    .box .box_3 {
+      transform: rotateY(7deg);
+    }
+
+    .box div {
+      height: 50px;
+      width: 50px;
+      /* flex-grow: 1; */
+      /* flex-shrink: 2; */
+      /* flex: 0.5 1 auto; */
+      /* flex:flex-grow flex-shrink flex-basis */
+      /* 可以用 flex:auto; 代替 flex: 1 1 auto;；
+    可以用 flex: none;代替 flex: 0 0 auto； */
+
+      /* margin-left: 5px; */
+      line-height: 50px;
+      text-align: center;
+      border: 1px solid skyblue;
+      list-style: none;
+      font-size: 18px;
+      color: yellowgreen;
+      vertical-align: middle;
+      display: inline-block;
+      /* 存在间隙 */
+    }
+
+    /* .box1 p:first-letter{
+      color: #ff0000;
+      font-size:xx-large;
+    }
+    .box1 p:first-line{
+      color:palevioletred;
+      font-variant: small-caps;
+    } */
+    .box1 p::before {
+      content: "**"
+    }
+
+    .box1 a:link {
+      color: #666666;
+    }
+
+    .box1 a:visited {
+      color: #666666;
+    }
+
+    .box1 a:hover {
+      color: red;
+      text-decoration: none;
+    }
+
+    .box1 a:active {
+      color: blueviolet;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <ul id='menu'>
+    <li id='list1'>list1 was clicked</li>
+    <li id='list2'>list2 was clicked</li>
+    <li id='list3'>list3 was clicked</li>
+  </ul> -->
+  <div class="box">
+    <div class="box_1">1</div>
+    <div>2</div>
+    <div class="box_3">3</div>
+    <div class="box_4">4</div>
+  </div>
+  <div class="box1">
+    <p>你可以结合使用"first-line"和"first-letter"伪元素向文本的首行和首字母设置特殊样式。你可以结合使用"first-line"和"first-letter"伪元素向文本的首行和首字母设置特殊样式。</p>
+    <a href="https://www.baidu.com">baidu</a>
+    <a href="https://www.baidu.com">baidu1</a>
+  </div>
+
+  <div id="box2">
+    我是div
+    <span>我是一个span</span>
+  </div>
+  <script type="text/javascript">
+
+    // function sortVersion(ver1, ver2) {
+
+    //   // var version1pre = parseFloat(ver1);
+    //   // var version2pre = parseFloat(ver2);
+    //   // var version1next = ver1.replace(version1pre + ".", "");
+    //   // var version2next = ver2.replace(version2pre + ".", "");
+    //   // if (version1pre > version2pre) {
+    //   //   return true;
+    //   // } else if (version1pre < version2pre) {
+    //   //   return false;
+    //   // } else {
+    //   //   if (version1next >= version2next) {
+    //   //     return true;
+    //   //   } else {
+    //   //     return false;
+    //   //   }
+    //   // }
+    //   var s1 = parseFloat(s1);
+    //   var s2 = parseFloat(s2);
+    //   var result = s1.concat(",",s2)
+    //   .split(",");
+    //   result.sort((a,b)=>{
+    //     return a-b;
+    //   });
+    //   console.log(result);
+
+    // }
+
+
+    function sortVersion(s1, s2) {
+      var arr = [];
+      arr.sort((s1, s2) => {
+        const listA = s1.split('.');
+        const listB = s2.split('.');
+        let k = undefined;
+
+        for (let i in listA) {
+          let itemA = Number(listA[i] || 0);
+          let itemB = Number(listB[i] || 0);
+
+          if (itemA === itemB) {
+            continue;
+          } else {
+            k = Number(itemA) - Number(itemB);
+            break;
+          }
+        }
+        if (k === undefined) {
+          k = listA.length - listB.length;
+        }
+        return k;
+      });
+
+    }
+    sortVersion('5.2.0', '5.10');
+
+
+
+    // function longestSubStrLength(s1, s2) {
+    //   if (s1.length > s2.length) {
+    //     var temp = s1;
+    //     s1 = s2;
+    //     s2 = temp;
+    //   }
+    //   var len1 = str1.length,
+    //     len2 = str2.length;
+    //   for (var j = len1; j > 0; j--) {
+    //     for (var i = 0; i < len1 - j; i++) {
+    //       var current = str1.substr(i, j);
+    //       if (str2.indexOf(current) >= 0) {
+    //         return current;
+    //       }
+    //     }
+    //   }
+    //   return "";
+    // }
+    // function findSubStr(str1, str2) {
+    //   if (str1.length > str2.length) {
+    //     var temp = str1;
+    //     str1 = str2;
+    //     str2 = temp;
+    //   }
+    //   var len1 = str1.length,
+    //     len2 = str2.length;
+    //   for (var j = len1; j > 0; j--) {
+    //     for (var i = 0; i < len1 - j; i++) {
+    //       var current = str1.substr(i, j);
+    //       if (str2.indexOf(current) >= 0) {
+    //         return current;
+    //       }
+    //     }
+    //   }
+    //   return "";
+    // }
+
+    // function add() {
+    //   var a = 1;
+    //   return function () {
+    //     a++;
+    //     // console.log(a+"*");
+    //     return a++;
+    //   }
+    // }
+    // var result = add();
+    // console.log(result());//2
+    // console.log(result());//4
+
+    // var str = "hello";
+    // var fn1 = function () {
+    //   console.log(str);//HELLOW
+    // }
+    // str = "HELLOW";
+    // var fn2 = function () {
+    //   var str = "world";
+    //   fn1();
+    //   str = "WORLD";
+    // }
+    // fn2();
+
+    // var a = {};
+    // b = a;
+    // b = null;
+    // console.log(typeof (a) == 'object');
+
+    // var box = document.getElementById("box2");
+    // console.log(box.innerHTML);
+    // console.log(box.innerText);
+    //   let iterable = [10, 20, 30];
+    //   for (const value in iterable) {
+    //     if (value == 10) {
+    //       iterable.shift();
+    //     }
+    //     console.log(value);//0
+    //     break;
+    //   }
+    // 11
+    // 21
+    // 31
+
+    // //原型链继承
+    // function Person() { };
+    // Person.prototype.name = "Nn";
+    // Person.prototype.age = 18;
+    // Person.prototype.sayName = function () {
+    //   hah
+    //   console.log(this.name);
+    // }
+    // var person1 = new Person();
+    // var person2 = new Person();
+    // person1.name = "song"
+    // console.log(person1.name + "~");//song
+    // console.log(person2.name + "*");//Nn
+    // delete person1.name;
+    // console.log(person1.name + "#");//Nn
+    // console.log(person2.name + "%");//Nn
+    // Person();
+    // console.log(Person.sayName);//????
+
+
+    //promise简单例子
+    // const promise = new Promise((resolve, reject) => {
+    //   setTimeout(reject, 1000, ["我是第一个值", "我是第二个值"]);
+    // })
+
+    // promise.then(()=>{
+    //   console.log('resolve:成功回调函数！');
+    // },()=>{
+    //   console.log('reject:回调函数');
+    // })
+
+    // promise.then((value1,value2)=>{
+    //   console.log('resolve:成功回调函数！' + value1+" "+ value2);//我是第一个值
+    // }).catch((value)=>{
+    //   console.log('reject:回调函数'+value);//undefined
+    // })//不管是成功回调，还是拒绝都是能正常返回第一个值，后面的是undefined
+
+    // promise.then((value1) => {
+    //   console.log('resolve:成功回调函数！' + value1);//resolve:成功回调函数！我是第一个值,我是第二个值
+    // }).catch((value) => {
+    //   console.log('reject:回调函数' + value);//reject:回调函数我是第一个值,我是第二个值
+    // })
+
+
+    // for (var i = 0; i < 5; i++) {
+    //   setTimeout(() => {
+    //     console.log('2:' + i);
+    //   }, 1000);
+    //   console.log('1:' + i);
+    // }
+    // console.log(i);
+
+
+    // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+
+    // for(let i = 0;i<5;i++){
+    //   setTimeout(()=>{
+    //     console.log('2:'+i);
+    //   },1000);
+    //   console.log('i:'+i);
+    // }
+    // console.log(i);
+
+    // var loop = function (_i) {
+    //   setTimeout(function () {
+    //     console.log('2：', _i);
+    //   }, 1000);
+    // };
+    // for (var _i = 0; _i < 5; _i++) {
+    //   loop(_i);
+    // }
+    // console.log(_i);
+    // var a = 9;
+    // function t(){
+    //   var b = ()=>{
+    //     console.log(a);
+    //   }
+    //   b();
+    // }
+    // t();
+
+
+
+    //promise本身是同步的，promise的then/cacth方法是异步的，回调（setTimeout/setInterval）垫底
+    // setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，也就是说，尽可能早得执行。
+    // let a = new Promise(
+    //   function (resolve, reject) {
+    //     console.log(1)
+    //     setTimeout(() => console.log(2), 100)
+    //     console.log(3)
+    //     console.log(4)
+    //     // resolve()
+    //     reject()
+    //   }
+    // )
+    // a.then(v => {
+    //   console.log(8)
+    // }).catch(() => {
+    //   console.log(8 + '~');
+    // })
+
+    // let b = new Promise(
+    //   function () {
+    //     console.log(5)
+    //     setTimeout(() => console.log(6), 0)
+    //   }
+    // )
+    // console.log(7);
+    //1 3 4 5 7 8 2 6
+    //1 3 4 5 7 8 6 2
+
+    // let iterable = new Map([["a", 1], ["b", 2], ["c", 3]]);
+    // for (let entry of iterable) {
+    //   console.log(entry);
+    // }
+    // ["a", 1]   ===> 0:"a",1:"1"
+    // ["b", 2]   ===> 0:"b",1:"2"
+    // ["c", 3]   ===> 0:"c",1:"3"
+
+    // for (let [key, value] of iterable) {
+    //   console.log(key, value);
+    // }
+    // // a 1
+    // // b 2
+    // // c 3
+
+    // //数组去重
+    // const numbers = ["2", 3, 4, 4, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 5, 32, 3, 4, 5]
+    // console.log([...new Set(numbers)])
+
+
+    //生成器函数function*
+    // function* foo() {
+    //   yield 1;
+    //   yield 2;
+    //   yield 3;
+    // };
+
+    // for (let o of foo()) {
+    //   console.log(o);//1
+    //   break; // closes iterator, triggers return
+    // }
+
+    // for in for of 对比
+    // Object.prototype.objCustom = function () { };
+    // Array.prototype.arrCustom = function () { };
+
+    // let iterable = [3, 5, 7];
+    // iterable.foo = 'hello';
+
+    // for (let i in iterable) {
+    //   console.log(i); //  0, 1, 2, "foo", "arrCustom", "objCustom"
+    // }
+
+    // for (let i in iterable) {
+    //   if (iterable.hasOwnProperty(i)) {
+    //     console.log(i); //  0, 1, 2, "foo"
+    //   }
+    // }
+
+    // for (let i of iterable) {
+    //   console.log(i); //  3, 5, 7
+    // }
+
+
+    // 但是可以循环一个拥有enumerable属性的对象。
+    // 如果我们按对象所拥有的属性进行循环，可使用内置的Object.keys()方法
+    // let obj = { a: '1', b: '2', c: '3', d: '4' }
+    // for (let o of Object.keys(obj)) {
+    //   console.log(o)
+    // }
+    // // a
+    // // b
+    // // c
+    // // d
+
+    // 如果我们按对象所拥有的属性值进行循环，可使用内置的Object.values()方法
+    // let obj = { a: '1', b: '2', c: '3', d: '4' }
+    // for (let o of Object.values(obj)) {
+    //   console.log(o)
+    // }
+    // test.html:103 1
+    // test.html:103 2
+    // test.html:103 3
+    // test.html:103 4
+
+    // function logArrayElements(element, index, array) {
+    //   console.log('a[' + index + '] = ' + element, array);
+    // }
+    // // 注意索引 2 被跳过了，因为在数组的这个位置没有项
+    // [2, 5, , 9, 1].forEach(logArrayElements);
+    // logs:
+    // a[0] = 2 [2, 5, , 9]
+    // a[1] = 5 [2, 5, , 9]
+    // a[3] = 9 [2, 5, , 9]
+
+
+    //forEach 用法
+    // const items = ['item1', 'item2', 'item3'];
+    // const copy = [];
+    // // before
+    // for (let i = 0; i < items.length; i++) {
+    //   copy.push(items[i]);
+    // }
+    // console.log(copy);
+    // // after
+    // items.forEach(function (item) {
+    //   copy.push(item);
+    // });
+    // console.log(copy);
+
+
+    // var words = ["one","two","three","four"];
+    // words.forEach((i)=>{
+    //   console.log(i);
+    //   if(i === "two"){
+    //     words.shift();
+    //   }
+    // })
+
+
+
+    // Object.prototype.say = "hello";
+    // var person = { age: 18 };
+    // for (var key in person) {
+    //   console.log(key, person[key]);
+    // }
+
+    // Array.prototype.say = "u";
+    // var children = [1, 3, "djn"];
+    // for (var key in children) {
+    //   console.log(key, children[key]);
+    // }
+
+    // Object.prototype.say = "hello";
+    // var person = { age: 18 };
+    // for (var key in person) {
+    //   if (person.hasOwnProperty(key)) {
+    //     console.log(key, person[key]);
+    //   }
+    // }
+
+    // Array.prototype.say = "u";
+    // var children = [1, 3, "djn"];
+    // for (var key in children) {
+    //   if (children.hasOwnProperty(key)) {
+    //     console.log(key, children[key]);
+    //   }
+    // }
+
+    // Object.prototype.say = "hello";
+    // var person = { age: 18 };
+    // console.log(Object.keys(person));
+
+
+    // // simple array
+    // var arr = ['a', 'b', 'c'];
+    // console.log(Object.keys(arr)); // console: ['0', '1', '2']
+
+    // // array like object
+    // var obj = { 0: 'a', 1: 'b', 2: 'c' };
+    // console.log(Object.keys(obj)); // console: ['0', '1', '2']
+
+    // // array like object with random key ordering
+    // var anObj = { name: "nn", 100: 'a', 2: 'b', 7: 'c', age: "kk" };
+    // console.log(Object.keys(anObj)); // console: ["2", "7", "100", "name", "age"]
+
+    // for (var i in anObj) {
+    //   console.log(+i);
+    // }//这种方式只能识别num索引 //2 7 100 NaN NaN 
+
+    // test.html: 74 2
+    // test.html: 74 7
+    // test.html: 74 100
+    // test.html: 74 name
+    // test.html: 74 age
+    // test.html: 74 say
+
+
+    // for(var j of anObj){
+    //   console.log(j);
+    // }//
+
+    // // getFoo is a property which isn't enumerable
+    // var myObj = Object.create({}, {
+    //   getFoo: {
+    //     value: function () { return this.foo; }
+    //   }
+    // });
+    // myObj.foo = 1;
+    // console.log(Object.keys(myObj)); // console: ['foo']
+
+
+
+    // var name = "rose";
+    // var obj = {
+    //   name: "jack",
+    //   func: function () {
+    //     console.log(this.name)
+    //   }
+    // }
+    // var obj2 = {
+    //   name: "jay",
+    // }
+    // var func = obj.func.bind(obj);
+    // func.call(obj2);
+
+    // function rr(){
+    //  for(var i = 0;i<5;i++){
+    //    setTimeout(function(){
+    //      console.log(i);
+    //    },1000)
+    //  }
+    //  console.log(i);
+    // }
+    // rr()
+    // var menu = document.getElementById('menu');
+    // menu.addEventListener('click', function (e) {
+    //   // console.log(e,e.target,e.target.id);
+    //   console.log(e.target.id + ' was clicked');
+    // });
+
+
+
+
+
+
+
+    //浏览器的内核---渲染引擎  负责对语法解释并渲染页面，渲染尽情决定 浏览器如何显示网页内容 以及 页面的格式信息。
+    //浏览器内核 trident(IE)、Gecko(火狐firefox) 、Webkit(Safari)、Blink(Google)
+
+    // js面试题
+    // console.log(a);
+    // a();
+    // var a = 3;
+    // function a(){
+    //   console.log(10);
+    // }
+    // console.log(a);
+    // a = 6;
+    // a();
+
+
+    // var a;
+    // function a() { console.log(10) };
+    // console.log(a);
+    // a();
+    // a();
+    // a = 3;
+    // console.log(a);
+    // a = 6;
+    // a();
+
+    // function A() {
+    //   this.a = 1;
+    // }
+    // A.prototype = {
+    //   x: 1
+    // }
+    // var a = new A();
+    // var b = new A();
+
+    // a.x = 2;
+    // console.log(b.x);//1
+    // console.log(a);//A {a: 1, x: 2}
+    // console.log(b);//A {a: 1}
+    // var st = [12, '23', 11, 67, 98237, 344];
+    // console.log(Math.min.apply(this,st));
+
+
+    // var a;
+    // console.log(a); //undefined
+    // a();
+    // a = function () { console.log(a) };
+    // console.log(a);//Uncaught TypeError: a is not a function
+    // a = 6; 
+    // a();
+
+    // var a = 0;
+    // function aa(a) {
+    //   alert(a)
+    //   a = 3
+    // }
+    // aa(5) //5
+    // alert(a)//0
+
+    // var a = 0;
+    // function aa(a) {
+    //   alert(a)
+    //   this.a = 3
+    // }
+    // aa(5)//5
+    // alert(a)//3
+
+    // var a = 0;
+    // function aa(a){
+    //   console.log(a);//5
+    //   var a = 3;
+    //   console.log(a);//3
+    // }
+    // aa(5);
+
+
+    //打印斐波那切数列
+    // var arr = [];
+    // for (var i = 0; i < 10; i++) {
+    //   i <= 1 ? arr.push(1) : arr.push(arr[i - 1] + arr[i - 2]);
+    // }
+    // console.log(arr);
+
+
+    // function num(m, n) {
+    //   console.log(m);
+    //   if (m < n) {
+    //     num(m + 1, n);
+    //     console.log(m + "~~");
+    //   }
+    // }
+    // num(2, 5);
+
+
+    // function foo1(){
+    //   return {
+    //     bar:"hello"
+    //   }
+    // }
+    // function foo2(){
+    //   return 
+    //*****************************注意点
+    //   {
+    //     bar:'hh'
+    //   }
+    // }
+    // var a = foo1();
+    // var b = foo2();
+    // console.log(a);//{bar: "hello"}
+    // console.log(b);//undefined
+
+    // for(var i = 0; i < 5; i++){
+    //   console.log(i);
+    // }
+    // console.log(i);
+
+
+    // for(var i = 0; i < 5; i++){
+    //  setTimeout(()=>{
+    //   console.log(i);
+    //  },1000);
+    // }
+    // console.log(i);
+
+    // for (var i = 0; i < 5; i++) {
+    //   (function (j) {
+    //     setTimeout(() => {
+    //       console.log(j);
+    //     }, 1000)
+    //   })(i);
+    // }
+    // console.log(i);
+
+    // for(var i = 0; i < 5; i++){
+    //   (function(j){
+    //     setTimeout(()=>{
+    //       console.log(j);
+    //     })
+    //   })(i);
+    // }
+    // console.log(i);
+
+
+
+
+
+
+    // function DateDemo(){
+    // var d, s="今天日期是：";
+    // d = new Date();
+    // s += d.getMonth() + "/";
+    // s += d.getDate() + "/";
+    // s += d.getYear();
+    // // s += d.getFullYear();
+    // return s;
+    // }
+    // console.log(DateDemo());
+
+
+    ///////////////////判断一个数是否是正数
+    // var a = 2.3;
+    // console.log(typeof (a));
+    // console.log(Math.floor(a / 1));
+    // if (Math.floor(a / 1) === a && typeof (a) === "number") {
+    //   console.log(true);
+    // } else {
+    //   console.log(false);
+    // }
+
+    // 浅拷贝
+    // var obj = {
+    //   key:"one"
+    // };
+    // function copy(obj){
+    //   var obj1 ={};
+    //   for(var i in obj){
+    //     obj1[i] = obj[i]; 
+    //   }
+    //   return obj1;
+    // }
+    // obj.key1 = ["谢谢","对不起"];
+    // var result = copy(obj);
+    // console.log(result);//{ key:"one",["谢谢","对不起"]}
+    // result.key2 = ["9890"];
+    // console.log(result.key);//one
+    // console.log(result.key2);//["9890"]
+    // console.log(obj.key2);//undefined
+    // result.key1.push("再见");
+    // console.log(obj.key1);// ["谢谢", "对不起", "再见"]
+
+    // // es6 浅拷贝  对象
+    // var a = { name: "娜娜" };
+    // var b = Object.assign({}, a);
+    // b.age = 18;
+    // console.log(a.age);
+    // console.log(b);
+    // console.log(a);
+
+    // const target = { a: 1, b: 2 };
+    // const source = { b: 4, c: 5 };
+    // const returnedTarget = Object.assign(target, source);
+    // console.log(source);//{b: 4, c: 5}
+    // console.log(target);
+    // // expected output: Object { a: 1, b: 4, c: 5 }
+    // console.log(returnedTarget);
+    // // expected output: Object { a: 1, b: 4, c: 5 }
+
+    /////////////////数组浅拷贝
+    // var a = [1,2,3];
+    // var b = a.slice(0,2);
+    // b.push(9);
+    // console.log(a);//[1, 2, 3]
+    // console.log(b);//[1, 2, 9]
+
+    // var a = [1, 2, 3];
+    // var b = a.concat();
+    // b.push(9);
+    // console.log(a);//[1, 2, 3]
+    // console.log(b);//[1, 2, 3, 9]
+
+    //////////////////
+    // var a = [1, 2, 3];
+    // var b = [...a];
+    // b.push(9);
+    // console.log(a);//[1, 2, 3]
+    // console.log(b);//[1, 2, 3, 9]
+
+    /////////////
+    // function myFunction(x, y, z) {
+    //   console.log(x, y, z);//0,1,2
+    // }
+    // var args = [0, 1, 2];
+    // myFunction.apply(null, args);
+
+    // function myFunction(x, y, z) {
+    //   console.log(x, y, z);//0,1,2
+    // }
+    // var args = [0, 1, 2];
+    // myFunction(...args);
+
+    // function myFunction(v, w, x, y, z) { 
+    //   console.log(v, w, x, y, z);
+    //   console.log(typeof(z));
+    // }
+    // var args = [0, 1];
+    // myFunction(-1, ...args, 2, ...[3]);
+
+
+
+    // var str = 12000000.111;
+    // console.log(str.toLocaleString());//12,000,000.11
+
+
+    // var str = "ghwg"
+    // var arr1 = new Array();
+    // arr[6] = 66666;
+
+    // var arr = [1, 2, 3, 4, 5, 888888, "shdeh", "83789"];
+    // console.log(arr.push("$$"));//9
+    // console.log(arr);// [1, 2, 3, 4, 5, 888888, "shdeh", "83789", "$$"]
+    // console.log(arr.pop());//$$
+    // console.log(arr.pop());//83789
+    // console.log(arr);//[1, 2, 3, 4, 5, 888888, "shdeh"]
+
+    // var arr = [1, 2, 3, 4, 5, 888888, "shdeh", "83789"];
+    // console.log(arr.unshift("**"));//9
+    // console.log(arr);//["**", 1, 2, 3, 4, 5, 888888, "shdeh", "83789"]
+    // console.log(arr.shift());//"**"
+    // console.log(arr);//[1, 2, 3, 4, 5, 888888, "shdeh", "83789"]
+
+    // var arr = [-1,-3,-10,1,2,9,2,10,20,-22];
+    // console.log(arr.reverse());
+    // console.log(arr);
+    // console.log(arr.sort());//[-1, -10, -22, -3, 1, 10, 2, 2, 20, 9]
+    // console.log(arr);//[-1, -10, -22, -3, 1, 10, 2, 2, 20, 9]
+
+    // //若想从小到大、从大到小数字排序，可做以下处理
+    // console.log(arr.sort((a,b)=>{
+    //   return a - b;
+    // }));//[-22, -10, -3, -1, 1, 2, 2, 9, 10, 20]
+    // console.log(arr.sort((a,b)=>{
+    //   return b - a;
+    // }));//[20, 10, 9, 2, 2, 1, -1, -3, -10, -22]
+    // console.log(arr.reverse());
+
+
+    //正则表达式匹配
+    // //var isMatch = (s, p)=> new RegExp(`^${p}$`).test(s);
+    // var isMatch = function (s, p) {
+    //   var strp = `(${p})`
+    //   var test = new RegExp(`${strp}`);
+    //   if (test.test(s)) {
+    //     return RegExp.$1 === s
+    //   } else {
+    //     return false;
+    //   }
+    // };
+    // console.log(isMatch("", "*"));
+
+    // var isMatch = function (str, mode) {
+    //   let reg = new RegExp(mode)
+    //   let r = str.match(reg)
+    //   if (!r) return false
+    //   if (r[0] === str) {
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // };
+
+    //存在疑问的题目，回文
+    // function myFunction(s, a, b) {
+    //   while (a >= 0 && b < s.length && s.charAt(a) == s.charAt(b)) {
+    //     a--;
+    //     b++;
+    //   }
+    //   return b - a + 1;
+
+    // }
+    // //最长回文子串
+    // var longestPalindrome = function (s) {
+    //   var max = "", sLen = s.length;
+    //   if (sLen < 2)
+    //     return s;
+    //   var maxLen = 0;
+    //   for (let i = 0; i < sLen; i++) {
+    //     var l1 = myFunction(s, i, i);
+    //     if (l1 > maxLen) {
+    //       maxLen = l1;
+    //       max = s.slice(i - l1 / 2, i + l1 / 2 + 1);
+    //     }
+    //     var l2 = myFunction(s, i, i + 1);
+    //     if (l2 > maxLen) {
+    //       maxLen = l2;
+    //       max = s.slice(i - l1 / 2 + 1, i + l1 / 2 + 1);
+    //     }
+    //   }
+    //   return max;
+    // };
+    // var str = "bbjxieabcba"
+    // console.log(longestPalindrome(str));
+    // var arr1 = [1,undefined,3,null,5];
+    // var arr2 = Array.prototype;
+    // console.log(arr2.join.call("nnsxsong","*"));
+    // console.log(arr1[3]);
+    // console.log(arr1.join());
+
+    // var obj = {
+    //   "a":1,
+    //   "b":2,
+    //   "c":3,
+    //   length:4
+    // };
+    // console.log(obj.join());//对象不适用于join()
+
+
+    // console.log(arr.join("*"));//1*2*3*4*5*888888*shdeh*83789
+    // console.log(arr.join(""));//12345888888shdeh83789
+    // console.log(arr.join(" "));//1 2 3 4 5 888888 shdeh 83789
+    // console.log(arr.join());//1,2,3,4,5,888888,shdeh,83789
+
+    // console.log(Array.isArray(arr));
+    // console.log(Array.isArray(str));
+    // console.log(arr.toString());//1,2,3,4,5,888888
+    // console.log(arr);
+    // console.log(arr.join("*"));//1*2*3*4*5*888888
+    // console.log(arr);
+    // console.log(arr.toLocaleString());//1,2,3,4,5,888,888,shdeh,83789
+    // var strr = arr.toLocaleString();
+    // console.log(strr[19])//h
+    // // console.log(arr[6]);//undefined
+    // console.log(arr.valueOf());
+
+
+    // //最长回文子串   复杂度过高，不能解决输入："bb",输出："bb",此方法这类结果为："b"
+    // var longestPalindrome = function (s) {
+    //   var max = "", sLen = s.length;
+    //   if (sLen < 2) return s;
+    //   for (let i = 0; i < sLen; i++) {
+    //     for (let j = i; j < sLen; j++) {
+    //       var childStr = s.slice(i, j);
+    //       var childStrLen = childStr.length;
+    //       var arr = childStr.split("");
+    //       var str = arr.join();
+    //       var maxLen = max.length;
+    //       var str1 = arr.reverse().join();
+    //       if (str === str1 && maxLen <= childStrLen) {
+    //         max = childStr;
+    //       }
+    //       childStr = childStrLen = arr = str = str1 = maxLen = null;
+    //     }
+    //   }
+    //   return max;
+    // };
+
+    // var str = "bb";
+    // console.log(longestPalindrome(str));
+
+
+    ////最长回文子串
+    // function myF(s, a, b) {
+    //   if (a >= 0 && b < s.length && s.charAt(a) == s.charAt(b)) {
+    //     a--;
+    //     b++;
+    //   }
+    //   return b - a - 1;
+    // }
+    // var longestPalindrome = function (s) {
+    //   var max = '', maxLen = max.length, sLen = s.length;
+    //   if (sLen < 2) return s;
+
+    //   for (let i = 0; i < sLen; i++) {
+    //     var li = myF(s, i, i);
+    //     if (li > maxLen) {
+    //       maxLen = li;
+    //       max = s.slice(i - (li - 1) / 2, i - (li - 1) / 2 + 1);
+    //     }
+    //     var li1 = myF(s, i, i + 1);
+    //     if (li1 > maxLen) {
+    //       maxLen = li1;
+    //       max = s.slice(i - li1 / 2 + 1, i + li1 / 2 + 1)
+    //     }
+    //   }
+    //   return max;
+    // }
+    // var str = "bb"
+    // console.log(longestPalindrome(str));
+
+    // // 法2
+    // var longestPalindrome = function (s) {
+    //   var max = '';
+    //   var len = s.length
+    //   if (len < 2) return s;
+    //   for (var i = 0; i <= len; i++) {
+    //     var max_new = core(s, len, i)
+    //     max = max_new.length > max.length ? max_new : max;
+    //   }
+    //   return max;
+    // };
+    // function core(str, str_len, str_i) {
+    //   var max_1 = loop(str_i - 1, str_i + 1); // 一核对称 str_len >= 3 str_i = 1
+    //   var max_2 = loop(str_i, str_i + 1); // 双核对称 str_len >= 2 str_i = 0
+    //   return max_1.length > max_2.length ? max_1 : max_2;
+
+    //   function loop(pre, next) {
+    //     if (!str[pre] || !str[next]) return str.slice(pre + 1, next);
+    //     if (str.charAt(pre) === str.charAt(next)) return loop(pre - 1, next + 1)
+    //     else return str.slice(pre + 1, next)
+    //   }
+    // }
+
+
+    // //两数之和等于目标值，打印两数的索引
+    // var nums = [2, 7, 11, 15], target = 9;
+    // function twoSum(nums, target) {
+    //   var arrs = nums;
+    //   var arr = [];
+    //   for (let i = 0; i < arrs.length; i++) {
+    //     for (let j = i + 1; j < arrs.length; j++) {
+    //       if (arrs[i] + arrs[j] === target) {
+    //         arr.push(i, j)
+    //         return arr
+    //       }
+    //     }
+    //   }
+    // };
+    // var tmp = twoSum(nums, target);
+    // console.log(tmp);
+
+    //不含有重复字符且指出现一次字符的连续子串的最大长度
+    // var str = "abcdabcdefhirec"
+    // var sr = "000011110000011"
+    // function lengthSubstring(msg) {
+    //   var arr = [], count = 0;
+    //   var arrIndex = [];
+    //   var max = 0;
+    //   var l = msg.length;
+    //   for (var i = 0; i < l; i++) {
+    //     let charAt = msg.charAt(i);
+    //     if (arr.indexOf(charAt) === -1) {
+    //       arr.push(charAt);
+    //       arrIndex.push(0);
+    //     } else {
+    //       arrIndex.push(1);
+    //     }
+    //   }
+    //   console.log(arrIndex);//[0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1]
+    //   for (let prop in arrIndex) {
+    //     if (arrIndex[prop] === 0) {
+    //       count++;
+    //       max = Math.max(max, count);
+    //     } else {
+    //       count = 0;
+    //     }
+    //   }
+    //   console.log(max);//5
+    // }
+    // lengthSubstring(str);
+
+    // //字符串中不重复连续的子串最大长度
+    function maxLength(s) {
+      let num = 0, j = 0, t = 0
+      for (let i = 0; i < s.length; i++) {
+        t = s.slice(j, i).indexOf(s[i]);
+        console.log(t);
+        if (t == -1) {
+          num = Math.max(num, i - j + 1)
+        } else {
+          j = j + t + 1
+        }
+      }
+      console.log(num);
+    }
+    var s = "abcdabcdefhirec"
+    maxLength(s);
+
+
+    // for (let i = 0; i < arrIndex.length; i++) {
+    //   if (arrIndex[i] === 0 ){
+    //     count++;
+    //     max = Math.max(max,count);
+    //   }else{
+    //     count = 0;
+    //   }
+    // }
+
+    // //寻找两个有序数组的中位数
+    // var findMedianSortedArrays = function (nums1, nums2) {
+    //   var arr = [];
+    //   if (nums1 || nums2) {
+    //     arr = nums1.concat(nums2);
+    //     var l = arr.length;
+    //     // console.log(arr);
+    //     arr.sort(function (a, b) {
+    //       return a - b;
+    //     });
+    //     // console.log(arr);
+    //     if (l % 2 === 1) {
+    //       return arr[(l - 1) / 2];
+    //     } else {
+    //       return (arr[l / 2] + arr[l / 2 - 1]) / 2;
+    //     }
+    //   }
+    // };
+    // var result = findMedianSortedArrays([-20, -1, 1, -3], [2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    // console.log(result);//4
+
+    // var str = "abc def";
+    // var str1 = "ABC DEF"
+
+    // var strr = "nns,"
+    // var strs = "  abc d,cefg ef,hijk  "
+    // var strs1 = "  Abc d,AbC dd, abc ,cefg ef,hijk  "
+
+    //字符串的逆向输出
+    // var str = "abc def"
+    // function reverse() {
+    //   if (str.length > 0) {
+    //     var s = str.split("").reverse().join("");
+    //     console.log(str.split(""));// ["a", "b", "c", " ", "d", "e", "f"]
+    //     console.log(str.split("").reverse());//["f", "e", "d", " ", "c", "b", "a"]
+    //     console.log(s);////"fed cba"
+    //   }
+    // }
+    // reverse()//"fed cba"
+
+    // var str = "abc def";
+    // var str11 = "";
+    // function reverse1() {
+    //   var l = str.length;
+    //   if (l > 0) {
+    //     for (let i = l - 1; i >= 0; i--) {
+    //       str11 += str.charAt(i);
+    //     }
+    //     console.log(str11);
+    //   }
+    // }
+    // reverse1();
+
+    //字符串去重
+    // function removeRepeat(str) {
+    //   if (str.length === 0) { return }
+    //   var stt = [];
+    //   arr = str.split("");// ["a", "b", "c", "d", "f", "f", "r", "j", "h", "g", "t", " ", "i", "o", "f", "j", "e", "i"]
+    //   for (var i = 0; i < arr.length; i++) {
+    //     if (stt.indexOf(arr[i]) === -1) {
+    //       stt.push(arr[i]);
+    //     }
+    //   }
+    //   var result = stt.join("");
+    //   console.log(result);
+    // }
+    // var strr = "abcdffrjhgt iofjei"
+    // removeRepeat(strr)//"abcdfrjhgt ioe"
+
+    // //统计字符串中每个字符出现的次数
+    // function count(msg) {
+    //   var obj = {};
+    //   var max = 0, maxStr = "";
+    //   for (let i = 0; i < msg.length; i++) {
+    //     var charAt = msg.charAt(i);
+    //     if (obj[charAt]) {
+    //       obj[charAt]++;
+    //     } else {
+    //       obj[charAt] = 1;
+    //     }
+    //   }
+    //   console.log(obj);//{a: 3,b: 1,c: 1,d: 2,e: 2,h: 1,j: 3,k: 5,l: 2,n: 2,q: 1,u: 1,v: 3,w: 1,x: 1}
+    //   for (prop in obj) {
+    //     if (obj[prop] > max) {
+    //       max = obj[prop];
+    //       maxStr = prop;
+    //     }
+    //   }
+    //   console.log(maxStr + ":" + max);//k:5
+    // }
+    // var str = "abcdjevuhkqkndkvjanxlkeakljwv";
+    // count(str);
+
+
+
+    // var obj = {
+    //   a: 1,
+    //   b: 4,
+    //   c: 5,
+    //   d: 9
+    // }
+    // console.log(obj.b);//4
+    // console.log(obj['b']);//4   //访问键值对可以有两种方式：1.obj.key; 2.obj["key"]一般情况下都需要加引号（单双都可以），但是在循环遍历对象的时候只能用第2中索引方式
+
+    //检索字符串的子字符串  
+    //  console.log(strs1.search("abc"));//16
+    //  console.log(strs1.search(/abc/gi));//2
+    //  console.log(str1.search('r'));//-1
+
+    //字符串的检索匹配
+    // var patt = /ef/g;
+    // var result = patt.exec(strs)
+    // console.log(result);//["ef", index: 9, input: "  abc d,cefg ef,hijk  ", groups: undefined]
+    // console.log(result.index);//9
+    // console.log(result.input);//"  abc d,cefg ef,hijk  "
+
+
+
+    // var arr = ["a", "b", "cde", { f: "g" }];
+    // var arr1 = [1, 2, 3]
+
+    //字符串的匹配
+    // console.log(str.match(/def/g));//["def"]
+    // console.log(str.match("def"));//["def", index: 4, input: "abc def", groups: undefined]
+    // console.log(str.match("rr"));//null
+
+    //字符串大小写转换
+    // console.log(str1.toLowerCase());//abc def
+    // console.log(str.toUpperCase());//ABC DEF
+    // console.log(str1.toLocaleLowerCase());//abc def
+    // console.log(str.toLocaleUpperCase());//ABC DEF
+
+
+    //字符串 索引位置对应的位置
+    // console.log(strs.charAt(3));
+    // console.log(strs.charCodeAt(3));
+
+    //查找子字符串的位置
+    // console.log(strs.indexOf(","));//7
+    // console.log(strs.indexOf(",",8));//15
+    // console.log(strs.lastIndexOf(","));//15
+    // console.log(strs.lastIndexOf(",",8));//7
+
+    //字符串连接
+    // console.log(str+strs);
+    // console.log(str.concat(strs+strr));
+    // console.log(str.concat(strs+strr).slice(0,-1));
+    // console.log(str);
+    // console.log(arr.concat(arr1));
+
+    //字符串替换
+    // console.log(strs.replace(/ /g, ""));
+    // console.log(strs.trim());
+    // console.log(strs);
+    // console.log(strs.replace(/^\s+|\s+$/g, ''));
+
+
+    // console.log(strs.replace(/e/g,'*'));
+    // console.log(strs.replace(/e/,'*'));
+    // console.log(strs.replace(/ /g,"*"));
+
+   //字符串分割
+    // console.log(strs.split(","));//["abc d", "cefg ef", "hijk"]
+    // console.log(strs.split(" "));//["abc","d,cefg","ef,hijk"]
+    // console.log(strs.split(""));//["a", "b", "c", " ", "d", ",", "c", "e", "f", "g", " ", "e", "f", ",", "h", "i", "j", "k"]
+    // console.log(strs.split());//["abc d,cefg ef,hijk"]
+    // console.log(strs.split("e"));//["abc d,c", "fg ", "f,hijk"]
+    // console.log(strs.split(",",2));//["abc d", "cefg ef"]
+    // console.log(strs.split(" ",2));//["abc","d,cefg"]
+    // console.log(strs.split("",2));//["a", "b"]
+    // console.log(strs.split( ));//["abc d,cefg ef,hijk"]
+    // console.log(strs.split("e",2));//["abc d,c", "fg "]
+    // console.log(strs);
+
+
+    // console.log(str.substr(3));//" def"
+    // console.log(str.substr(-3));//"def"
+    // console.log(str.substr(0, -1))//""
+    // console.log(str.substr(-1, -1))//""
+    // console.log(str.substr(-2, 2))//"eg"
+    // console.log(str.substr(-2, 9))//"ef"
+    // console.log(str.substr(4,-1)+"<br/>");//"d"
+
+    // console.log(str.substring(3));//" def"
+    // console.log(str.substring(-3));//"abc def"
+    // console.log(str.substring(0, -1))//""
+    // console.log(str.substring(-1, -1))//""
+    // console.log(str.substring(-2, 2))//"ab"
+    // console.log(str.substring(-2, 9))//"abc def"
+    // console.log(str.substring(4,-1)+"<br/>");//"bc "
+    // console.log(str);//"abc def"
+
+    // console.log(str.slice(3));//" def"
+    // console.log(str.slice(-3));//"def"
+    // console.log(str.slice(0, -1))//"abc de"
+    // console.log(str.slice(-1, -1))//""
+    // console.log(str.slice(-2, 6))//"e"
+    // console.log(str.slice(-2, 9))//"ef"
+    // console.log(str.slice(4,1));//""
+    // console.log(str);//"abc def"
+
+    // console.log(arr.slice(0,-1));//["a", "b", "cde"]
+    // console.log(arr.slice(-1, -1))//[]
+    // console.log(arr.slice(-2, 6))//["cde",{f:"g"}]
+    // console.log(arr.slice(4,1));//[]
+    // console.log(arr);//"a","b","cde",{f:"g"}];
+  </script>
+</body>
+
+</html>

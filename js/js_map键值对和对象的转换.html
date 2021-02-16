@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>map对象转换</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+  <script type="text/javascript">
+    const map = new Map().set("1", "a").set("2", "b");//Map(2) {"1" => "a", "2" => "b"}
+    //转换成数组
+    console.log([...map]);//[Array(2),Array(2)]=>[["1","a"],["2","b"]]
+    //转换成对象
+    function mapToObj(map) {
+      // var obj = Object.create(null);
+      var obj = {};
+      for (let [item, index] of map) {
+        obj[item] = index;
+      }
+      return obj;
+    }
+    var result = mapToObj(map);
+    console.log(result);//{1: "a", 2: "b"}
+
+    //对象转为map
+    function objToMap(obj) {
+      let newMap = new Map();
+      for (let key of Object.keys(obj)) {
+        newMap.set(key, obj[key]);
+      }
+      // console.log(newMap);
+      return newMap;
+    }
+    var obj = { "1": "a", "2": "b" };
+    var result1 = objToMap(obj);
+    console.log(result1);//Map(2) {"1" => "a", "2" => "b"}
+
+    //map转换成JSON
+    //1_map键名是字符串形式，可选择  转为 对象JSON
+
+    function mapToStringJson(map) {
+      return JSON.stringify(mapToObj(map));
+    }
+    // let myMap = new Map()
+    var result = mapToStringJson(map);
+    console.log(result); //{"1":"a","2":"b"}
+
+    //2_map 键名是非字符串 可以考虑转为数组JSON
+    function mapToArrayJson(map) {
+      return JSON.stringify([...map]);
+    }
+    var myMap = new Map().set(true, 9).set({ foo: 3 }, ["abc"]);
+    var result2 = mapToArrayJson(myMap);
+    console.log(result2);//[[true,9],[{"foo":4},["abd"]]];
+
+
+    //对象JSON -> map
+    function jsonToStringMap(jsonStr) {
+      return objToMap(JSON.parse(jsonStr));
+    }
+    var result3 = jsonToStringMap('{"1":"a","2":"b"}');
+    console.log(result3);//Map(2) {"1" => "a", "2" => "b"}
+
+    //数组JSON -> map
+    function jsonToArrayMap(jsonArr) {
+      return new Map(JSON.parse(jsonArr));
+    }
+    var result4 = jsonToArrayMap('[[true,9],[{"foo":4},["abd"]]]');
+    console.log(result4);//{true => 9,Object {{foo: 4}=>["abd"]}  //{Object => Array(1)}
+  </script>
+</body>
+
+</html>

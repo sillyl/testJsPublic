@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>this指向问题</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+
+  <script type="text/javascript">
+
+    // var length = 10;
+    // function fn() {
+    //   console.log(this.length);
+    // }
+    // var obj = {
+    //   length: 5,
+    //   method: function (fn) {
+    //     fn();
+    //     arguments[0]();
+    //   }
+    // };
+    // obj.method(fn, 1);
+
+    var length = 10;
+    function fn() {
+      console.log(this.length);//10
+    }
+
+    var obj = {
+      length: 5,
+      method: function () {
+        console.log(this.length);//5
+        // fn.call(this);//5
+        fn();//10
+      }
+    };
+    obj.method();
+
+  </script>
+</body>
+
+</html>

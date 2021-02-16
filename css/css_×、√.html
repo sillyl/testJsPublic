@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>css_x、√</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 5px;
+      padding: 0;
+    }
+
+    .correct {
+      display: inline-block;
+      width: 10px;
+      height: 3px;
+      background: #ccc;
+      transform: rotate(45deg);
+    }
+
+    .correct::after {
+      content: '';
+      width: 20px;
+      height: 3px;
+      background: #ccc;
+      display: block;
+      transform: rotate(90deg) translateX(-42%);
+    }
+
+
+    .incorrect{
+      display: inline-block;
+      width: 12px;
+      height: 2px;
+      background: red;
+      transform: rotate(45deg);
+    }
+    .incorrect:after{
+      content: '';
+      width: 12px;
+      height: 2px;
+      background: red;
+      display: block;
+      transform: rotate(90deg)
+    }
+    /* 特殊字符 */
+    /* .correct:before {
+      content: '\2714';
+      color: #008100;
+    }
+
+    .incorrect:before {
+      content: '\2716';
+      color: #b20610;
+    } */
+  </style>
+</head>
+
+<body>
+  <div>
+    <span class="correct"></span>
+    <span class="incorrect"></span>
+  </div>
+
+  <script type="text/javascript">
+
+  </script>
+</body>
+
+</html>

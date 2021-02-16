@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>vue双向绑定</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <!-- 统计字符串中每个字符出现的次数 -->
+  </div>
+
+  <script type="text/javascript">
+
+    //     统计字符串中每个字符的出现频率，返回一个 Object，key 为统计字符，value 为出现频率
+    // 1. 不限制 key 的顺序
+    // 2. 输入的字符串参数不会为空
+    // 3. 忽略空白字符
+
+    ////////////////////////////////////////////////////
+    // function count(str) {
+    //   var obj = {};
+    //   for (var i = 0; i < str.length; i++) {
+    //     if (str[i] !== ' ') {
+    //       obj[str[i]] = obj[str[i]] ? ++obj[str[i]] : 1;
+    //     }
+    //   }
+    //   return obj;
+    // }
+    // var str = 'hello world';
+    // var result = count(str);
+    // console.log(result);//d: 1
+    // // e: 1
+    // // h: 1
+    // // l: 3
+    // // o: 2
+    // // r: 1
+    // // w: 1
+
+    // function count(msg) {
+    //   var obj = {};
+    //   var max = 0, maxStr = "";
+    //   for (let i = 0; i < msg.length; i++) {
+    //     var charAt = msg.charAt(i);
+    //     if (obj[charAt]) {
+    //       obj[charAt]++;
+    //     } else {
+    //       obj[charAt] = 1;
+    //     }
+    //   }
+    //   console.log(obj);//{a: 3,b: 1,c: 1,d: 2,e: 2,h: 1,j: 3,k: 5,l: 2,n: 2,q: 1,u: 1,v: 3,w: 1,x: 1}
+    //   for (prop in obj) {
+    //     if (obj[prop] > max) {
+    //       max = obj[prop];
+    //       maxStr = prop;
+    //     }
+    //   }
+    //   console.log(maxStr + ":" + max);//k:5
+    // }
+    // var str = "abcdjevuhkqkndkvjanxlkeakljwv";
+    // count(str);
+
+    function count(str) {
+      var max = 0;
+      var obj = {};
+      var maxstr = '';
+      for (let i = 0; i < str.length; i++) {
+        var charAt = str.charAt(i);
+        // console.log(charAt);
+        if (obj[charAt]) {
+          obj[charAt]++;
+        } else {
+          obj[charAt] = 1;
+        }
+      }
+
+      // console.log(obj);
+      for (let i in obj) {
+        // console.log(i);
+        if (obj[i] > max) {
+          max = obj[i];
+          maxstr = i;
+        }
+      }
+      return maxstr + '出现' + max + "次."
+    }
+
+
+
+    // function count(str) {
+    //   var max = 0;
+    //   var obj = {};
+    //   var maxStr = '';
+    //   for (let i = 0; i < str.length; i++) {
+    //     var charAt = str.charAt(i);
+    //     if (obj[charAt]) {
+    //       obj[charAt]++;
+    //     } else {
+    //       obj[charAt] = 1;
+    //     }
+    //   }
+    //   // console.log(obj);  
+    //   for (let i in obj) {
+    //     if (obj[i] > max) {
+    //       max = obj[i];
+    //       maxStr = i;
+    //     }
+    //   }
+    //   return maxStr + ',' + '出现' + max + '次';
+    // }
+    const str = 'asddfgdfwwqeweqwezczxcsdfgdgd';
+    var result = count(str);
+    console.log(result);
+  </script>
+</body>
+
+</html>

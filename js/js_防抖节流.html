@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>防抖节流</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .tixing {
+      width: 100px;
+      background: red;
+      border-width: 0px 100px 100px 100px;
+      border-style: solid;
+      border-color: transparent transparent skyblue;
+      /* border-radius: 5px 0 0 0; */
+    }
+
+    .sanjiao {
+      width: 0px;
+      height: 0px;
+      /* border: 50px solid red; */
+      border-width: 0px 50px 50px;
+      border-style: solid;
+      border-color: transparent transparent skyblue transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="tixing"></div>
+  <div class="sanjiao"></div>
+  <!-- 所谓防抖，就是指触发事件后在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。 -->
+  <div id="content"
+    style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:#ccc;font-size:80px;"></div>
+  <script>
+    let num = 1;
+    let content = document.getElementById('content');
+   
+
+    function count() {
+      // console.log(num+"*");
+      content.innerHTML = num++;
+    };
+    // content.onmousemove = count;
+    // content.onmousemove = debounce(count,1000);
+    content.onmousemove = throttle(count,1000);
+
+    // // 在触发事件后函数 1 秒后才执行，而如果我在触发事件后的 1 秒内又触发了事件，则会重新计算函数执行时间。
+
+    // // 非立即执行防抖
+    // function debounce(func, wait) {
+    //   let timeout;
+    //   return function () {
+    //     let context = this;
+    //     let args = arguments;
+    //     if (timeout) {
+    //       clearTimeout(timeout);
+    //     }
+    //     console.log(timeout);
+    //     timeout = setTimeout(() => {
+    //       func.apply(context, args)
+    //     }, wait);
+    //     console.log(timeout);
+    //   }
+    // }
+
+    // // 立即执行防抖
+    // // 立即执行版的意思是触发事件后函数会立即执行，然后 n 秒内不触发事件才能继续执行函数的效果。
+
+    // function debounce(func, wait) {
+    //   let timeout;
+    //   return function () {
+    //     let context = this;
+    //     let args = arguments;
+    //     if (timeout) clearTimeout(timeout);
+    //     console.log(timeout);
+    //     let callNow = !timeout;
+    //     timeout = setTimeout(() => {
+    //       // console.log(timeout+"@@");
+    //       timeout = null;
+    //     }, wait)
+    //     // console.log(callNow);
+    //     if (callNow) func.apply(context, args)
+    //   }
+    // }
+    // content.onmousemove = debounce(count, 1000);
+
+
+    // // 实现最终的双剑合璧版的防抖函数。
+    // // function debounce(func, wait, immediate) {
+    // //   let timeout;
+
+    // //   return function () {
+    // //     let context = this;
+    // //     let args = arguments;
+
+    // //     if (timeout) clearTimeout(timeout);
+    // //     if (immediate) {
+    // //       var callNow = !timeout;
+    // //       timeout = setTimeout(() => {
+    // //         timeout = null;
+    // //       }, wait)
+    // //       if (callNow) func.apply(context, args)
+    // //     }
+    // //     else {
+    // //       timeout = setTimeout(function () {
+    // //         func.apply(context, args)
+    // //       }, wait);
+    // //     }
+    // //   }
+    // // }
+    // // content.onmousemove = debounce(count, 1000, true);
+
+
+    // // 所谓节流，就是指连续触发事件但是在 n 秒中只执行一次函数。对于节流，一般有两种方式可以实现，分别是时间戳版和定时器版。
+
+    // // 时间戳   在持续触发事件的过程中，函数会立即执行，并且每 1s 执行一次。
+    // function throttle(func, wait) {
+    //   let  previous = 0;
+    //   // console.log(previous+"##");
+    //   return function () {
+    //     let now = Date.now();
+    //     let context = this;
+    //     let args = arguments;
+    //     if (now - previous > wait) {
+    //       func.apply(context, args);
+    //       previous = now;
+    //       console.log(previous);
+    //     }
+    //   }
+    // }
+    // content.onmousemove = throttle(count,1000);
+
+    // // 定时器  在持续触发事件的过程中，函数不会立即执行，并且每 1s 执行一次，在停止触发事件后，函数还会再执行一次。
+    function throttle(func, wait) {
+      let timeout;
+      return function () {
+        let context = this;
+        let args = arguments;
+        if (!timeout) {
+          timeout = setTimeout(() => {
+            timeout = null;
+            func.apply(context, args)
+          }, wait)
+        }
+      }
+    }
+    // content.onmousemove = throttle(count, 1000);
+
+    // // 时间戳版和定时器版的节流函数的区别就是，时间戳版的函数触发是在时间段内开始的时候，而定时器版的函数触发是在时间段内结束的时候。
+
+
+    // // 双剑合璧版
+    // /*
+    //  * @desc 函数节流
+    //  * @param func 函数
+    //  * @param wait 延迟执行毫秒数
+    //  * @param type 1 表时间戳版，2 表定时器版
+    //  */
+    // function throttle(func, wait, type) {
+    //   if (type === 1) {
+    //     let previous = 0;
+    //   } else if (type === 2) {
+    //     let timeout;
+    //   }
+    //   return function () {
+    //     let context = this;
+    //     let args = arguments;
+    //     if (type === 1) {
+    //       let now = Date.now();
+
+    //       if (now - previous > wait) {
+    //         func.apply(context, args);
+    //         previous = now;
+    //       }
+    //     } else if (type === 2) {
+    //       if (!timeout) {
+    //         timeout = setTimeout(() => {
+    //           timeout = null;
+    //           func.apply(context, args)
+    //         }, wait)
+    //       }
+    //     }
+    //   }
+    // }
+
+
+
+    // var hero = {
+    //   _name: 'John Doe',
+    //   getSecretIdentity: function () {
+    //     return this._name;
+    //   }
+    // };
+    // var stoleSecretIdentity = hero.getSecretIdentity;
+    // console.log(stoleSecretIdentity());//undefined
+    // console.log(hero.getSecretIdentity());//John Doe
+
+
+
+
+    //归并排序
+    // function mergeSort(arr) {
+    //   const length = arr.length;
+    //   if (length === 1) { //递归算法的停止条件，即为判断数组长度是否为1
+    //     return arr;
+    //   }
+    //   const mid = Math.floor(length / 2);
+
+    //   const left = arr.slice(0, mid);
+    //   const right = arr.slice(mid, length);
+
+    //   return merge(mergeSort(left), mergeSort(right)); //要将原始数组分割直至只有一个元素时，才开始归并
+    // }
+
+    // function merge(left, right) {
+    //   const result = [];
+    //   let il = 0;
+    //   let ir = 0;
+
+    //   //left, right本身肯定都是从小到大排好序的
+    //   while (il < left.length && ir < right.length) {
+    //     if (left[il] < right[ir]) {
+    //       result.push(left[il]);
+    //       il++;
+    //     } else {
+    //       result.push(right[ir]);
+    //       ir++;
+    //     }
+    //   }
+
+    //   //不可能同时存在left和right都有剩余项的情况, 要么left要么right有剩余项, 把剩余项加进来即可
+    //   while (il < left.length) {
+    //     result.push(left[il]);
+    //     il++;
+    //   }
+    //   while (ir < right.length) {
+    //     result.push(right[ir]);
+    //     ir++;
+    //   }
+    //   return result;
+    // }
+
+    // var arr1 = [1, 4, 2, 3];
+    // console.log(mergeSort(arr1));
+
+
+  </script>
+</body>
+
+</html>

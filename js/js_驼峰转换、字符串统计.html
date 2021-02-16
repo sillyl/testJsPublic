@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>驼峰转换、字符串统计</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+  <script type="text/javascript">
+    //驼峰转换
+    // function cssStyle2DomStyle(sName) {
+    //   var newArr = sName.split("");
+    //   if (newArr[0] == '-') {
+    //     newArr.shift();
+    //   }
+    //   for (var i = 0; i < newArr.length; i++) {
+    //     if (newArr[i] == '-') {
+    //       newArr.splice(i, 1);
+    //       newArr[i] = newArr[i].toUpperCase();
+    //     }
+    //   }
+    //   return newArr.join('');
+    // }
+    // var result = cssStyle2DomStyle('-font-size-we');
+
+    function zhuanhuan(str) {
+      var arr = str.split("");
+      if (arr[0] == "-") {
+        arr.shift();
+      }
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] == '-') {
+          arr.splice(i, 1);
+          arr[i] = arr[i].toUpperCase();
+        }
+      }
+      var result = arr;
+      if (result[0].charCodeAt >= "97") {
+        result[0] = result[0].toUpperCase();
+      }
+      // console.log(result);
+      return result.join("");
+    };
+    var result = zhuanhuan("webkit-background-image");
+    console.log(result);
+
+
+    function zhuanxiaoxie(str) {
+      if (str.length == 0) return;
+      var arr = str.split("");
+      var newArr = [];
+      if (arr[0].charAt() >= "A" && arr[0].charAt() <= "Z") {
+        arr[0] = arr[0].toLowerCase();
+      }
+      for (var i = 0; i < arr.length; i++) {
+        // if (arr[i].charCodeAt() <= 65 || arr[i].charCodeAt() >= 91) {
+        //   newArr.push(arr[i]);
+        // };
+        if (arr[i].charCodeAt() >= '65' && arr[i].charCodeAt() <= '91') {
+          newArr.push("-");
+          arr[i] = arr[i].toLowerCase();
+        }
+        newArr.push(arr[i]);
+      }
+      return newArr.join("");
+      // console.log(arr);
+
+    }
+    var result = zhuanxiaoxie("WebkitBackgroundImage");
+    console.log(result);
+    //     统计字符串中每个字符的出现频率，返回一个 Object，key 为统计字符，value 为出现频率
+    // 1. 不限制 key 的顺序
+    // 2. 输入的字符串参数不会为空
+    // 3. 忽略空白字符
+    function count(str) {
+      var obj = {};
+      for (var i = 0; i < str.length; i++) {
+        if (str[i] !== ' ') {
+          obj[str[i]] = obj[str[i]] ? ++obj[str[i]] : 1;
+        }
+      }
+      return obj;
+    }
+    var str = 'hello world';
+    var result = count(str);
+    console.log(result);//d: 1
+// e: 1
+// h: 1
+// l: 3
+// o: 2
+// r: 1
+// w: 1
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>js_输出问题</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+
+  <script type="text/javascript">
+
+    //b依然会在全局上，而a则在自调用函数中，外部访问不到;
+    // (function () {
+    //   var a = b = 3;
+    // })();
+    // console.log(b);//3
+    // console.log(a);//undefined
+
+    // var a = b = 4;
+    // console.log(b);//4
+    // console.log(a);//4
+
+    /////////////////////////////////////////
+    // 在外部函数中，this和self都引用myObject，因此都可以正确地引用和访问foo。
+    // 但在内部函数中，这不再指向myObject。因此，this.foo在内部函数中是未定义的，
+    // 而对局部变量self的引用仍然在范围内并且可以在那里访问。
+    var myObject = {
+      foo: "bar",
+      func: function () {
+        var self = this;
+        console.log("outer func:  this.foo = " + this.foo);//bar
+        console.log("outer func:  self.foo = " + self.foo);//bar
+        (function () {
+          console.log("inner func:  this.foo = " + this.foo);//undefined
+          console.log("inner func:  self.foo = " + self.foo);//bar
+        }());
+      }
+    };
+    myObject.func();
+
+    ///////////////////////////////////////////////
+    function foo1() {
+      return {
+        bar: "hello"
+      };
+    }
+    function foo2() {
+      return
+      {
+        bar: "hello"
+      };
+    }
+    console.log(foo1());//{bar: "hello"}
+    console.log(foo2());//undefined
+
+
+    ///////////////////////////////////////////////////////////
+    console.log(0.1 + 0.2);//0.30000000000000004
+    console.log(0.1 + 0.2 == 0.3);//false
+
+
+    ///////////////////////////////////////////
+    function areTheNumbersAlmostEqual(num1, num2) {
+      return Math.abs(num1 - num2) < Number.EPSILON;
+    }
+    console.log(areTheNumbersAlmostEqual(0.1 + 0.2, 0.3));//true
+
+    /////////////////////////////////////
+    // (function () {
+    //   console.log(1);
+    //   setTimeout(function () { console.log(2) }, 1000);
+    //   setTimeout(function () { console.log(3) }, 0);
+    //   console.log(4);
+    // })();
+    //1 4 3 2
+
+    //////////////////////////////判断是否回文palindrome
+    // function isPalindrome(str) {
+    //   str = str.replace(/\W/g, '').toLowerCase();//匹配非字母、数字、下划线。等价于 '[^A-Za-z0-9_]'。
+    //   console.log(str);//acaramanamaraca
+    //   return (str == str.split('').reverse().join(''));
+    // }
+    // console.log(isPalindrome("level"));                   // logs 'true'
+    // console.log(isPalindrome("levels"));                  // logs 'false'
+    // console.log(isPalindrome("A car, a man, a maraca"));  // logs 'true'
+
+    ////////////////////////////////写一个sum方法，当使用下面的语法调用时它将正常工作
+    // console.log(sum(2, 3));   // Outputs 5
+    // console.log(sum(2)(3));  // Outputs 5
+
+    // function sum(x) {
+    //   if (arguments.length == 2) {
+    //     return arguments[0] + arguments[1];
+    //   } else {
+    //     return function (y) {
+    //       return x + y;
+    //     }
+    //   }
+    // }
+
+    // function sum(x, y) {
+    //   if (y !== undefined) {
+    //     return x + y;
+    //   } else {
+    //     return function (y) {
+    //       console.log(y + '~~');//3
+    //       return x + y;
+    //     }
+    //   }
+    // }
+
+
+    ////////////////////////////////////////
+    for (var i = 0; i < 5; i++) {
+      var btn = document.createElement('button');
+      btn.appendChild(document.createTextNode('Button ' + i));
+      btn.addEventListener('click', function () { console.log(i); });
+      document.body.appendChild(btn);
+    }
+
+    for (var i = 0; i < 5; i++) {
+      var btn = document.createElement('button');
+      btn.appendChild(document.createTextNode('Button ' + i));
+      (function (i) {
+        btn.addEventListener('click', function () { console.log(i); });
+      })(i);
+      document.body.appendChild(btn);
+    }
+
+
+    var arr1 = "john".split('');
+    var arr2 = arr1.reverse();
+    var arr3 = "jones".split('');
+    arr2.push(arr3);
+    console.log(arr1, arr1.slice(-1));
+    console.log(arr2, arr2.slice(-1));
+
+
+    // var a = {},
+    //   b = { key: 'b' },
+    //   c = { key: 'c' };
+
+    // a[b] = 123;
+    // a[c] = 456;
+
+    // console.log(a[b]);
+
+    // var sdtr = "abcd";
+    // console.log(sdtr.split('')+[]);//'a,b,c,d'
+    // console.log(sdtr.split('')+{});//'a,b,c,d[object Object]'
+
+
+    function sun() {
+      var a = b = 2;
+      console.log(a, b);//2,2
+      //var a = 2;b = 2;
+    }
+    sun();
+    console.log(b);//2
+    // console.log(a);//undefined  a只是局部变量，外部函数访问不到，b为全局变量
+
+  </script>
+</body>
+
+</html>

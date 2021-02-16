@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>数组去重</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <!-- 借用判断数据类型的方式，去做数组去重
+    Object.prototype.toString.call()
+    [object Number]
+    [object Array]等 -->
+
+  </div>
+
+  <script type="text/javascript">
+    // var arr = [2, 4, 5, 6, 8, 1, 1, 4, 5];
+    // console.log([...new Set(arr)]);//[2,4,5,6,8,1];
+    // var arr1 = [3, 4, 5, 6, [6, 7, 8, 9], 0, 9, 4];
+    // console.log([...new Set(arr1)]);//[3,4,5,6,[6,7,8,9],0,9];
+
+    // Array.prototype.flatArr = function () {
+    //   var newArr = [];
+    //   function quchong(s) {
+    //     for (var i = 0; i < s.length; i++) {
+    //       // console.log(Object.prototype.toString.call(s[i]));//判断数据类型最好的方式
+    //       if (Object.prototype.toString.call(s[i]) == "[object Array]") {
+    //         quchong(s[i]);
+    //       } else {
+    //         newArr.push(s[i]);
+    //         console.log(newArr);
+    //       }
+    //     }
+    //   }//这个函数主要去除[]
+    //   // quchong(arr1);
+    //   quchong(this);
+    //   console.log(this);//this指向arr1  //[3, 4, 5, 6, [6, 7, 8, 9], 0, 9, 4];
+    //   console.log(newArr);//[3, 4, 5, 6, 6, 7, 8, 9, 0, 9, 4]
+    //   var x = new Set(newArr);
+    //   return [...x];
+    // }
+    // console.log(arr1.flatArr());//[3, 4, 5, 6, 7, 8, 9, 0]
+
+    var arr = [1, 2, 1, 2, 1, 3];
+    // function deleteArray(arr) {
+    //   var newArr = [];
+    //   for (var i = 0; i < arr.length; i++) {
+    //     if (Object.prototype.toString.call(arr[i] == "[object Array]")) {
+    //       let dealArr = this.deleteArray(arr[i]);
+    //       newArr = [...newArr, ...dealArr];
+    //     } else {
+    //       newArr.push(arr[i]);
+    //     }
+    //   }
+
+    //   var result = [...new Set(newArr)];
+    //   return result;
+    //   // return result.sort((a, b) => {
+    //   //   return b - a;
+    //   // })
+    // }
+    // console.log(deleteArray(arr));
+
+
+
+
+
+
+    var s = readline().split(",");
+    function quchong(s) {
+      var newArr = [];
+      for (var i = 0; i < s.length; i++) {
+        // console.log(s[i]);
+        if (Object.prototype.toString.call(s[i]) == "[object Array]") {
+          let dealArr = this.quchong(s[i]);
+          newArr = [...newArr, ...dealArr];
+        } else {
+          newArr.push(s[i]);
+          // console.log(newArr);
+        }
+      }
+      var result = [...new Set(newArr)];
+      return result.sort((a, b) => {
+        return b - a;
+      })
+
+    }
+    // var arre = [false, true, undefined, null, NaN, 0, 1, {}, {}, 'a', 'a', NaN];
+    console.log(quchong(s));//[3, 4, 5, 6, 7, 8, 9, 0]
+
+
+  </script>
+</body>
+
+</html>

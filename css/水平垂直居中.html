@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .parent {
+      text-align: center;
+    }
+
+    .child {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+      display: inline-table;
+      /* 块级元素改变为行内块元素(inline-block、inline-table、inline-flex、inline-grid) */
+    }
+
+    .box_b {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      text-align: center;
+      line-height: 100px;
+      background: red;
+    }
+
+    .box1 {
+      position: relative;
+    }
+
+    .box1_c {
+      width: 100px;
+      height: 100px;
+      border: 1px solid blue;
+      position: absolute;
+      background: skyblue;
+      left: 50%;
+      margin-left: -50px;
+      /* transform: translateX(-50%); */
+    }
+
+    .box2 {
+      display: flex;
+    }
+
+    .box2_c {
+      width: 100px;
+      height: 100px;
+      border: 1px solid green;
+      margin: 0 auto;
+    }
+
+    .box3 {
+      position: relative;
+    }
+
+    .box3_c {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border: 1px solid greenyellow;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+    }
+
+    .box4 {
+      height: 200px;
+      display: flex;
+    }
+
+    .box4_c {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  水平居中
+  <div class="parent">
+
+    <div class="child">法一</div>
+  </div>
+  <div>
+    <div class="box">
+      <div class="box_b">法二</div>
+    </div>
+  </div>
+  <div class="box1">
+    <div class="box1_c">absolute+transform</div>
+  </div>
+  <div style="margin-bottom:100px">
+    dewfqr
+  </div>
+  <div class="box2">
+    <div class="box2_c">flex+margin</div>
+  </div>
+
+  <div class="box3">
+    <div class="box3_c">绝对定位元素水平居中</div>
+  </div>
+
+  <div style="margin-bottom:100px">
+    dewfqr
+  </div>
+  <div class="box4">
+    <div class="box4_c">绝对定位元素水平居中</div>
+  </div>
+
+
+</body>
+
+</html>

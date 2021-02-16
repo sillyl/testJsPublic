@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>url分割</title>
+</head>
+
+<body>
+
+  <script>
+    function GetRequest() {
+      var url = location.search; //获取url中"?"符后的字串
+      var theRequest = new Object();
+      if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+          theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+        }
+      }
+      return theRequest;
+    }
+    // var Request = new Object();
+    var Request = GetRequest();
+    console.log(Request);
+
+    // var url = Window.location.search;//获取url地址？至结尾的所有参数
+    // //key(需要检错的键） url（传入的需要分割的url地址）
+    // function getSearchString(key, Url) {
+    //   // 获取URL中?之后的字符
+    //   var str = Url;
+    //   str = str.substring(1, str.length);
+    //   // 以&分隔字符串，获得类似name=xiaoli这样的元素数组
+    //   var arr = str.split("&");
+    //   var obj = new Object();
+    //   // 将每一个数组元素以=分隔并赋给obj对象 
+    //   for (var i = 0; i < arr.length; i++) {
+    //     var tmp_arr = arr[i].split("=");
+    //     obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
+    //   }
+    //   return obj[key];
+    // }
+  </script>
+</body>
+
+</html>

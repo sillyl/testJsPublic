@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>js_闭包</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    当内部函数以某一种方式被任何一个外部函数作用域访问时，一个闭包就产生了。
+  </div>
+  <script type="text/javascript">
+
+    //闭包的作用：
+    // 一个是可以读取函数内部的变量
+    // 另一个就是让这些变量的值始终保持在内存中，不会在函数调用后被自动清除。
+    // 对闭包理解就是：既想重用变量，又不想变量受到全局污染。
+
+    // function init() {
+    //   var name = 'nn';
+    //   function newName() {
+    //     console.log(name);
+    //   }
+    //   newName();
+    // }
+    // init();
+
+    // var obj = {
+    //   fn: function () {
+    //     let result = [];
+    //     for (let i = 0; i < 10; i++) {
+    //       result[i] = function (num) {
+    //         return num;
+    //       }(i);
+    //     }
+    //     return result;
+    //   }
+    // }
+    // console.log(obj.fn());
+
+
+    // 高阶函数和闭包结合的小例子
+    //既然变量可以指向函数，函数的参数能接收变量，
+    // 那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数
+    var add = function () {
+      var num = 0;
+      return function (a) {
+        return num = num + a;
+      }
+    }
+    console.log(add()(1));//1
+    console.log(add()(2));//2
+
+    // var add1 = function () {
+    //   var num1 = 0;
+    //   return function (a) {
+    //     return num1 = num1 + a;
+    //   }
+    // }
+    // var adder = add();
+    // console.log(adder(1));//1
+    // console.log(adder(2));//3
+    // ////////////////////////////////////////
+    // var loop = function (_i) {
+    //   setTimeout(function () {
+    //     console.log('2：', _i);
+    //   }, 1000);
+    // };
+
+    // for (var _i = 0; _i < 5; _i++) {
+    //   loop(_i);
+    // }
+    // console.log(i);
+    // i is not defined
+    // js_闭包.html:72 2： 0
+    // js_闭包.html:72 2： 1
+    // js_闭包.html:72 2： 2
+    // js_闭包.html:72 2： 3
+    // js_闭包.html:72 2： 4
+
+    //利用高阶函数实现闭包的缓存
+    // const result = function (fn) {
+    //   const cashe = {};
+    //   return function (...args) {
+    //     // console.log(args);
+    //     const _args = JSON.stringify(args)//讲对象装换成字符串，JSON.parse将字符串转换成对象
+    //     console.log(_args, cashe[_args], fn, fn.apply(null, args));
+    //     return cashe[_args] || (cashe[_args] = fn.apply(fn, args));
+    //   }
+    // }
+    // const sum = function (a, b) {
+    //   console.log('开始缓存');
+    //   return a + b;
+    // }
+    // const sumer = result(sum);
+    // console.log(sumer(2, 6));
+    // console.log(sumer(2, 6));
+    // console.log(sumer(10, 18));
+
+
+    const result = function (fn) {
+      const cache = {};
+      return function (...args) {
+        const _args = JSON.stringify(args);
+        return cache[_args] || (cache[_args] = fn.call(fn, ...args));
+      }
+    }
+    const sum = function (a, b) {
+      console.log('开始缓存');
+      return a + b;
+    }
+
+    const sumer = result(sum);
+    console.log(sumer(2, 6));
+    console.log(sumer(3, 9));
+    console.log(sumer(2, 6));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //使用闭包缓存数据
+    // function memory(fn) {
+    //   var cache = {};
+    //   return function () {
+    //     var key = arguments.length + Array.prototype.join.call(arguments, ',');
+    //     console.log(key);
+    //     cache[key] = cache[key] || fn.apply(this, arguments);
+    //     return cache[key];
+    //   }
+    // }
+    // var sum = memory(function (a, b) {
+    //   console.log('Hello world');
+    //   return a + b;
+    // });
+    // console.log(sum(2, 8));
+    // console.log(sum(2, 8));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // // in 判断对象是否为数组/对象的元素/属性
+    // var CachedSearchData = (function () {
+    //   var cacheData = [], count = cacheData.length;
+    //   return {
+    //     getSearchData: function (id) {
+    //       if (id in cacheData) {//如果结果在缓存中
+    //         return cacheData[id];//直接返回缓存中的对象
+    //       } else {
+    //         //到数据库中查找
+    //         console.log("search in database");
+    //       }
+    //     },
+    //     clearSearchData: function (id) {
+    //       if (dsid in cache) {
+    //         cache[dsid].clearSelection();
+    //       }
+    //     }
+    //   };
+    // })();
+    // CachedSearchData.getSearchData(77);
+
+    // var arr = ['a', 'b', 'c'];
+    // var arr2 = { 'a': 'ccc', 'b': 'fff' }
+    // function inArray(search, array) {
+    //   for (var i in array) {
+    //     if (array[i] == search) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
+    // console.log("15：", inArray("a", arr));
+    // console.log("16：", inArray("aa", arr));
+    // console.log("17：", inArray("a", arr2));
+    // console.log("18：", inArray("bbb", arr2));
+
+  </script>
+</body>
+
+</html>

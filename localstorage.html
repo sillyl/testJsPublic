@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>localStorage</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+
+  <script type="text/javascript">
+
+    //存
+    function setLocalStorage(key, val) {
+      window.localStorage.setItem(key, JSON.stringify(val));
+    };
+    //取
+    function getLocalStorage(key) {
+      let val = JSON.parse(window.localStorage.getItem(key));
+      return val;
+    };
+    //测试
+    setLocalStorage('demo', [1, 2, 3]);
+    let a = getLocalStorage('demo');//[1,2,3]
+  </script>
+</body>
+
+</html>

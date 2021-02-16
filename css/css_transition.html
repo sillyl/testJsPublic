@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>transition</title>
+</head>
+<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	body,
+	html {
+		height: 100%;
+	}
+
+	body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: black;
+	}
+
+	.box {
+		width: 200px;
+		height: 200px;
+		/*background: red;*/
+		position: relative;
+		transform: rotateX(-30deg) rotateY(30deg);
+		transform-style: preserve-3d;
+		animation: xuanzhuan 5s infinite linear;
+	}
+
+	@keyframes xuanzhuan {
+		0% {
+			transform: rotateX(0deg) rotateY(0deg);
+		}
+
+		100% {
+			transform: rotateX(360deg) rotateY(360deg);
+		}
+	}
+
+	.box:hover {
+		animation: xuanzhuan 5s infinite paused;
+	}
+
+	.box a {
+		display: block;
+		opacity: 0.7;
+		position: absolute;
+		left: 0;
+		top: 0;
+		border: 1px solid #fff;
+	}
+
+	.box_a {
+		width: 200px;
+		height: 200px;
+		background: black;
+		transition: all 3s;
+	}
+
+	.box_b {
+		width: 100px;
+		height: 100px;
+		background: skyblue;
+		margin: 50px;
+	}
+
+	/* :nth-child(n) 选择器匹配父元素中的第 n 个子元素，元素类型没有限制 */
+
+	.box .box_a:nth-child(1) {
+		transform: translateZ(100px);
+	}
+
+	.box .box_a:nth-child(2) {
+		transform: rotateY(180deg) translateZ(100px);
+	}
+
+	.box .box_a:nth-child(3) {
+		transform: rotateY(-90deg) translateZ(100px);
+	}
+
+	.box .box_a:nth-child(4) {
+		transform: rotateY(90deg) translateZ(100px);
+	}
+
+	.box .box_a:nth-child(5) {
+		transform: rotateX(90deg) translateZ(100px);
+	}
+
+	.box .box_a:nth-child(6) {
+		transform: rotateX(-90deg) translateZ(100px);
+	}
+
+
+
+	.box .box_b:nth-child(7) {
+		transform: translateZ(50px);
+	}
+
+	.box .box_b:nth-child(8) {
+		transform: rotateY(180deg) translateZ(50px);
+	}
+
+	.box .box_b:nth-child(9) {
+		transform: rotateY(-90deg) translateZ(50px);
+	}
+
+	.box .box_b:nth-child(10) {
+		transform: rotateY(90deg) translateZ(50px);
+	}
+
+	.box .box_b:nth-child(11) {
+		transform: rotateX(90deg) translateZ(50px);
+	}
+
+	.box .box_b:nth-child(12) {
+		transform: rotateX(-90deg) translateZ(50px);
+	}
+
+
+
+	.box:hover .box_a:nth-child(1) {
+		transform: translateZ(150px);
+	}
+
+	.box:hover .box_a:nth-child(2) {
+		transform: rotateY(180deg) translateZ(150px);
+	}
+
+	.box:hover .box_a:nth-child(3) {
+		transform: rotateY(-90deg) translateZ(150px);
+	}
+
+	.box:hover .box_a:nth-child(4) {
+		transform: rotateY(90deg) translateZ(150px);
+	}
+
+	.box:hover .box_a:nth-child(5) {
+		transform: rotateX(90deg) translateZ(150px);
+	}
+
+	.box:hover .box_a:nth-child(6) {
+		transform: rotateX(-90deg) translateZ(150px);
+	}
+</style>
+
+<body>
+	<div class="box">
+		<a href="#" class="box_a"><img src="image\IMG_4516.JPG" width="200px" height="200px" /></a>
+		<a href="#" class="box_a"><img src="image\IMG_4517.JPG" width="200px" height="200px" /></a>
+		<a href="#" class="box_a"><img src="image\IMG_4538.JPG" width="200px" height="200px" /></a>
+		<a href="#" class="box_a"><img src="image\IMG_4516.JPG" width="200px" height="200px" /></a>
+		<a href="#" class="box_a"><img src="image\IMG_4538.JPG" width="200px" height="200px" /></a>
+		<a href="#" class="box_a"><img src="image\IMG_4517.JPG" width="200px" height="200px" /></a>
+		<a href="#" class="box_b"></a>
+		<a href="#" class="box_b"></a>
+		<a href="#" class="box_b"></a>
+		<a href="#" class="box_b"></a>
+		<a href="#" class="box_b"></a>
+		<a href="#" class="box_b"></a>
+	</div>
+	<script type="text/javascript">
+
+	</script>
+</body>
+
+</html>

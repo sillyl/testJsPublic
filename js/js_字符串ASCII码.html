@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>字符串ASCII码</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    求字符串 'hello world' 对应的ASCII码数组，并按照编码大小逆序。
+    输入：'hello world’
+    输出：[119, 114, 111, 111, 108, 108, 108, 104, 101, 100, 32]
+  </div>
+
+  <script type="text/javascript">
+  function ascii(str){
+    var arr = str.split("");
+    var newArr = [];
+    arr.forEach(i => {
+      // console.log(i.charAt());
+      newArr.push(i.charCodeAt());
+    });
+    return newArr.sort((a,b)=>{
+      return b-a;
+    })
+  }
+    const str = 'hello world';
+    var result = ascii(str);
+    console.log(result);
+    // const array = str.split('').map(letter => {
+    //   return
+    //   letter.charCodeAt();
+    // }).sort(function () { return arguments[1] - arguments[0]; })
+  </script>
+</body>
+
+</html>

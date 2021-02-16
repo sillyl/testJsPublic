@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>js_继承</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+
+  <script type="text/javascript">
+    // a.name = “name1”; b.name = “name2”;
+
+    // function obj(name) {
+    //   if (name) {
+    //     this.name = name;
+    //     console.log(this);
+    //   }
+    //   console.log(this);//window
+    //   return this;
+    // }
+    // obj.prototype.name = "name2";
+    // var a = obj("name1");
+    // var b = new obj;
+    // console.log(a.name, b.name);//name1,name2
+
+    // function Obj(name) {
+    //   if (name) {
+    //     this.a = a;
+    //   }
+    //   return a;
+    // }
+    // obj.prototype.a = "a1";
+    // var a = Obj("a");
+    // var b = new obj;
+
+
+
+    // 构造函数继承------父类方法没有被共享，造成内存浪费
+    // function Teacher(){
+    //   var i = this;
+    //   this.name = ["nn"];
+    //   this.Newname = function(){
+    //     this.name.push("ss");
+    //   }
+    //   Teacher = function(){
+    //     return i;
+    //   }
+    // }
+    // function Student(){
+    //   var i = this;
+    //   Teacher.call(this);
+    //   Student = function(){
+    //     return i;
+    //   }
+    // }
+    // var student1 = new Student();
+    // var student2 = new Student();
+    // student2.name = "ss";
+    // console.log(student1.name,student2.name);
+    
+
+    //过滤掉键值小于2，得到剩余的键
+    // var data = { a: 1, b: 2, c: 3, d: 4 };
+    // console.log(Object.keys(data), Object.values(data));//["a", "b", "c", "d"] [1,2,3,4]
+    // Object.keys(data).filter(function (x) { return data[x] > 2; });//["c","d"]
+
+
+
+//////////////////////////////////
+    // ------原型链继承--------子类实例共享属性，造成实例间的属性会相互影响
+    // function Teacher() {
+    //   this.name = ['nn'];
+    //   this.newName = function () {
+    //     this.name = 'ss'
+    //   }
+    // }
+    // function Student() {
+    // }
+    // Student.prototype = new Teacher();
+    // var student1 = new Student();
+    // var student2 = new Student();
+    // student1.newName();
+    // console.log(student1.name, student2.name);//ss ['nn']
+    // console.log(student1.newName === student2.newName);//true
+
+    /////////////////////原型链继承//////////////////////////////////////
+    function Teacher() {
+      this.name = ['nn'];
+      this.newName = function () {
+        this.name.push('ss');
+      }
+    }
+    function Student() { }
+    Student.prototype = new Teacher();
+    var student1_1 = new Student();
+    var student1_2 = new Student();
+    student1_1.newName();
+    console.log(student1_1.name, student1_2.name);//['nn','ss'],['nn','ss']
+    // 可以看到子类的实例属性皆来自于父类的一个实例，即子类共享了同一个实例
+    console.log(student1_1.newName === student1_2.newName);//true
+
+
+
+
+
+    // 组合继承 父类构造函数被调用两次,子类实例的属性存在两份。造成内存浪费
+    // function Teacher() {
+    //   this.name = ['nn'];
+    // }
+    // Teacher.prototype.newName = function () {
+    //   this.name.push('ss');
+    // }
+    // function Student() {
+    //   Teacher.call(this);//// 生成子类的实例属性(但是不包括父对象的方法)
+    // }
+    // Student.prototype = new Teacher(); //// 继承父类的属性和方法(副作用: 父类的构造函数被调用的多次，且属性也存在两份造成了内存浪费)内存浪费)
+    // var student1 = new Student();
+    // var student2 = new Student();
+    // student1.newName();
+    // console.log(student1.name, student2.name);//['nn','ss'] ['nn']  子类实例不会相互影响
+    // console.log(student1.newName === student2.newName);//true  共享了父类的方法
+
+    //寄生继承  子类都有各自的实例不会相互影响，且共享了父类的方法
+    // function Teacher() {
+    //   this.name = ['nn'];
+    // }
+    // Teacher.prototype.newName = function () {
+    //   this.name.push('ss');
+    // }
+    // function Student() {
+    //   Teacher.call(this);// 生成子类的实例属性(但是不包括父对象的方法)
+    // }
+    // Student.prototype = Object.create(Teacher.prototype);
+    // // Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。 
+    // // 该方法会使用指定的原型对象及其属性去创建一个新的对象
+    // var student1 = new Student();
+    // var student2 = new Student();
+    // student1.newName()
+    // console.log(student1.name, student2.name);//['nn','ss'] ['nn']  子类实例不会相互影响
+    // console.log(student1.newName === student2.newName);//true
+
+
+    //ES6 class 和寄生继承效果一致
+    // class Teacher {
+    //   constructor() {
+    //     this.name = ['nn'];
+    //   }
+    //   newName() {
+    //     this.name.push('ss')
+    //   }
+    // }
+    // class Student extends Teacher {
+    //   constructor() {
+    //     super() ////代表父类的构造函数
+    //   }
+    // }
+    // var student1 = new Student();
+    // var student2 = new Student();
+    // student1.newName();
+    // console.log(student1.name, student2.name);//['nn','ss'] ['nn']  子类实例不会相互影响
+    // console.log(student1.newName === student2.newName);//true
+
+
+  </script>
+</body>
+
+</html>
